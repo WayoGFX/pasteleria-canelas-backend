@@ -46,3 +46,7 @@ RAILWAY-DEPLOY.md
 # Scripts de SQL Server (ya no se usan)
 esquema.sql
 
+# Archivos de Railway (no subir)
+esquema-postgresql.sql
+nixpacks.toml
+
