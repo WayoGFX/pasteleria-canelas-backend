@@ -76,9 +76,12 @@ builder.Services.AddControllers()
 
 var app = builder.Build();
 
-// Configurar el puerto dinámico para Railway
-//var port = Environment.GetEnvironmentVariable("PORT") ?? "5000";
-//app.Urls.Add($"http://0.0.0.0:{port}");
+// Configurar el puerto dinámico para Railway (solo en producción)
+if (app.Environment.IsProduction())
+{
+    var port = Environment.GetEnvironmentVariable("PORT") ?? "8080";
+    app.Urls.Add($"http://0.0.0.0:{port}");
+}
 
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())
