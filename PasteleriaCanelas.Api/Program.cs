@@ -9,6 +9,15 @@ using Microsoft.AspNetCore.ResponseCompression;
 
 var builder = WebApplication.CreateBuilder(args);
 
+// ============================================================================
+// CONFIGURAR PUERTO DINÁMICO (DEBE IR ANTES DE builder.Build())
+// ============================================================================
+var port = Environment.GetEnvironmentVariable("PORT") ?? "5000";
+builder.WebHost.ConfigureKestrel(options =>
+{
+    options.ListenAnyIP(int.Parse(port));
+});
+
 var myAllowSpecificOrigins = "_myAllowSpecificOrigins";
 
 builder.Services.AddCors(options =>
@@ -35,8 +44,22 @@ builder.Services.AddResponseCompression(options =>
 });
 
 
-// inyección de dependencias para el DbContext
-var connectionString = Environment.GetEnvironmentVariable("DATABASE_URL") ?? builder.Configuration.GetConnectionString("DefaultConnection");
+// ============================================================================
+// CONFIGURAR CONEXIÓN A POSTGRESQL (CON CONVERSIÓN DE URL DE RAILWAY)
+// ============================================================================
+var connectionString = Environment.GetEnvironmentVariable("DATABASE_URL");
+
+// Si existe DATABASE_URL de Railway, convertirla
+if (!string.IsNullOrEmpty(connectionString))
+{
+    connectionString = ConvertPostgresUrl(connectionString);
+}
+else
+{
+    // Fallback a appsettings.json (para desarrollo local)
+    connectionString = builder.Configuration.GetConnectionString("DefaultConnection");
+}
+
 builder.Services.AddDbContext<PasteleriaDbContext>(options =>
     options.UseNpgsql(connectionString));
 
@@ -76,13 +99,6 @@ builder.Services.AddControllers()
 
 var app = builder.Build();
 
-// Configurar el puerto dinámico para Railway (solo en producción)
-if (app.Environment.IsProduction())
-{
-    var port = Environment.GetEnvironmentVariable("PORT") ?? "8080";
-    app.Urls.Add($"http://0.0.0.0:{port}");
-}
-
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())
 {
@@ -106,4 +122,31 @@ app.UseCors(myAllowSpecificOrigins);
 app.MapControllers();
 
 app.Run();
-    
+
+
+// ============================================================================
+// MÉTODO HELPER: Convertir DATABASE_URL de Railway al formato de .NET
+// ============================================================================
+static string ConvertPostgresUrl(string url)
+{
+    try
+    {
+        // Railway da: postgres://user:pass@host:port/dbname
+        // .NET necesita: Host=host;Port=port;Database=dbname;Username=user;Password=pass
+        
+        var uri = new Uri(url.Replace("postgres://", "postgresql://"));
+        var db = uri.AbsolutePath.Trim('/');
+        var userInfo = uri.UserInfo.Split(':');
+        var user = userInfo[0];
+        var password = userInfo.Length > 1 ? userInfo[1] : "";
+        var host = uri.Host;
+        var port = uri.Port > 0 ? uri.Port : 5432;
+        
+        return $"Host={host};Port={port};Database={db};Username={user};Password={password};SSL Mode=Require;Trust Server Certificate=true";
+    }
+    catch (Exception ex)
+    {
+        Console.WriteLine($"Error convirtiendo DATABASE_URL: {ex.Message}");
+        return url; // Si falla, devuelve el original
+    }
+}
