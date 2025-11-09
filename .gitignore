@@ -33,6 +33,16 @@ TestResults/
 *.scc
 *.vssscc
 
-# Archivos de configuración local y scripts de base de datos
+# Archivos de configuración local
 appsettings.Development.json
+
+# Documentación local (no subir por ahora)
+RAILWAY-DEPLOY.md
+
+# Variables de entorno
+.env
+.env.local
+
+# Scripts de SQL Server (ya no se usan)
 esquema.sql
+

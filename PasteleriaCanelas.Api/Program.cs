@@ -38,7 +38,7 @@ builder.Services.AddResponseCompression(options =>
 // inyección de dependencias para el DbContext
 var connectionString = Environment.GetEnvironmentVariable("DATABASE_URL") ?? builder.Configuration.GetConnectionString("DefaultConnection");
 builder.Services.AddDbContext<PasteleriaDbContext>(options =>
-    options.UseSqlServer(connectionString));
+    options.UseNpgsql(connectionString));
 
 // servicio de producto al contenedor de inyección de dependencias.
 // Esto enlaza la interfaz (IProductoService) con su implementación (ProductoService).
@@ -76,6 +76,10 @@ builder.Services.AddControllers()
 
 var app = builder.Build();
 
+// Configurar el puerto dinámico para Railway
+//var port = Environment.GetEnvironmentVariable("PORT") ?? "5000";
+//app.Urls.Add($"http://0.0.0.0:{port}");
+
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())
 {
@@ -83,7 +87,11 @@ if (app.Environment.IsDevelopment())
     app.UseSwaggerUI();
 }
 
-app.UseHttpsRedirection();
+// Deshabilitar redirección HTTPS en producción (Railway maneja SSL)
+if (!app.Environment.IsProduction())
+{
+    app.UseHttpsRedirection();
+}
 
 // Habilitar compresión de respuestas
 app.UseResponseCompression();
