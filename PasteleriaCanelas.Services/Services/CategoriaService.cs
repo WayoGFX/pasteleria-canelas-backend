@@ -109,7 +109,7 @@ public async Task<CategoriaDto?> CrearCategoria(CategoriaCreacionDto categoriaDt
             return false;
         }
 
-        // Verificamos si hay algún producto asociado a esta categoría.
+        // verificamos si hay algún producto asociado a esta categoría.
         var tieneProductos = await _context.Productos.AnyAsync(p => p.CategoriaId == categoriaId);
 
         // Si la categoría tiene productos, devolvemos false.

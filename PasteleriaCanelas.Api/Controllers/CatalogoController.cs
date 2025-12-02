@@ -22,7 +22,7 @@ public class CatalogoController : ControllerBase
     }
 
 
-    // Endpoint NUEVO: Catálogo inicial optimizado
+    // Endpoint de catálogo inicial
     // GET /api/Catalogo/inicial
     [HttpGet("inicial")]
     public async Task<ActionResult<CatalogoInicialDto>> GetCatalogoInicial()

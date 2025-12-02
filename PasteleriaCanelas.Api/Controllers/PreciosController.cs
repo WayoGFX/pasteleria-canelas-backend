@@ -23,7 +23,7 @@ public class PreciosController : ControllerBase
         _productoService = productoService;
     }
 
-    // Endpoint 2: Agregar productos
+    // Endpoint 2 Agregar productos
     // POST /api/Precios
     [HttpPost]
     public async Task<ActionResult<ProductoPrecioDto>> PostPrecio(ProductoPrecioCreacionDto precioDto)
@@ -36,7 +36,7 @@ public class PreciosController : ControllerBase
         return CreatedAtAction(null, null, nuevoPrecio);
     }
 
-    // Endpoint 2: Agregar productos
+    // Endpoint 2 Agregar productos
     // PUT /api/Precios/{id}
     [HttpPut("{id}")]
     public async Task<IActionResult> PutPrecio(int id, ProductoPrecioActualizacionDto precioDto)
@@ -54,7 +54,7 @@ public class PreciosController : ControllerBase
         return NoContent();
     }
 
-    // Endpoint 2: Eliminar productos
+    // Endpoint 2 Eliminar productos
     // DELETE /api/Precios/{id}
     [HttpDelete("{id}")]
     public async Task<IActionResult> DeletePrecio(int id)

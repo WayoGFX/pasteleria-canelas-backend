@@ -23,7 +23,7 @@ public class ProductosController : ControllerBase
     }
 
 
-    // Endpoint 1: mostrar todos los productos
+    // Endpoint 1 mostrar todos los productos
     // GET /api/Productos
     [HttpGet]
     public async Task<ActionResult<IEnumerable<ProductoDetallesDto>>> GetAdminProductos()
@@ -33,7 +33,7 @@ public class ProductosController : ControllerBase
         return Ok(productos);
     }
 
-    // Endpoint 2: mostrar producto por id
+    // Endpoint 2 mostrar producto por id
     // GET /api/Productos/{id}
     [HttpGet("{id}")]
     public async Task<ActionResult<ProductoDetallesDto>> GetProducto(int id)
@@ -50,7 +50,7 @@ public class ProductosController : ControllerBase
 
     }
 
-    // Endpoint 3: agregar nuevo producto
+    // Endpoint 3 agregar nuevo producto
     // POST /api/Productos
     [HttpPost]
     public async Task<IActionResult> PostProducto(ProductoCreacionDto productoDto)
@@ -69,7 +69,7 @@ public class ProductosController : ControllerBase
     }
 
 
-    // Endpoint 4: actualizar producto
+    // Endpoint 4 actualizar producto
     // PUT /api/Productos
     [HttpPut("{id}")]
     public async Task<IActionResult> PutProducto(int id, ProductoActualizacionDto productoDto)
@@ -93,7 +93,7 @@ public class ProductosController : ControllerBase
         return NoContent();
     }
 
-    // Endpoint 5: eliminar producto
+    // Endpoint 5 eliminar producto
     // DELETE /api/Productos
     [HttpDelete("{id}")]
     public async Task<IActionResult> DeleteProducto(int id)

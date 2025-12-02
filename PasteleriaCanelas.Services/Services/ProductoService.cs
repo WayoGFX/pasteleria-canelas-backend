@@ -26,7 +26,7 @@ public class ProductoService : IProductoService
 
     // ADMINISTRADOR
 
-    // Implementación de metodo 1 : mostrar por id
+    // Implementación de metodo 1  mostrar por id
     public async Task<ProductoDetallesDto?> ObtenerProductoPorId(int productoId)
     {
         return await _context.Productos
@@ -63,7 +63,7 @@ public class ProductoService : IProductoService
     }
 
 
-    // Implementación de método 2 : mostrar productos (activos e inactivos)
+    // Implementación de método 2  mostrar productos (activos e inactivos)
     public async Task<IEnumerable<ProductoDetallesDto>?> ObtenerTodosProductos()
     {
         return await _context.Productos
@@ -99,7 +99,7 @@ public class ProductoService : IProductoService
             .ToListAsync();
     }
 
-    // Se implementa de método 3: crear un producto
+    // Se implementa de método 3 crear un producto
     public async Task<ProductoDetallesDto?> CrearProducto(ProductoCreacionDto productoDto)
     {
         // se valida que la categoría existe
@@ -156,7 +156,7 @@ public class ProductoService : IProductoService
         return productoRespuesta;
     }
 
-    // Implementación de método 4: actualizar producto
+    // Implementación de método 4 actualizar producto
     public async Task<bool> ActualizarProducto(ProductoActualizacionDto productoDto)
     {
         // Busca el producto por su ID
@@ -190,8 +190,6 @@ public class ProductoService : IProductoService
         producto.EsDeTemporada = productoDto.EsDeTemporada;
 
         // regenerar el slug si se ha cambiado o ha pasado algo
-    
-        
         producto.Slug = SlugGenerator.GenerateSlug(productoDto.Nombre!);
 
 
@@ -227,7 +225,7 @@ public class ProductoService : IProductoService
 
 
     // PRECIOS
-    // Implementación de método 1: crear precio
+    // Implementación de método 1 crear precio
     public async Task<ProductoPrecioDto?> CrearPrecio(ProductoPrecioCreacionDto precioDto)
     {
         // Se valida que el producto exista
@@ -256,7 +254,7 @@ public class ProductoService : IProductoService
         return precioRespuesta;
     }
 
-    // Implementación de método 2: actualizar precio
+    // Implementación de método 2 actualizar precio
     public async Task<bool> ActualizarPrecio(ProductoPrecioActualizacionDto precioDto)
     {
         var precio = await _context.ProductoPrecios.FindAsync(precioDto.ProductoPrecioId);
@@ -272,7 +270,7 @@ public class ProductoService : IProductoService
         return true;
     }
 
-    // Implementación de método 3: eliminar producto
+    // Implementación de método 3 eliminar producto
     public async Task<bool> EliminarPrecio(int precioId)
     {
         var precio = await _context.ProductoPrecios.FindAsync(precioId);
@@ -289,9 +287,7 @@ public class ProductoService : IProductoService
 
     // USUARIO NORMAL
 
-    // NUEVO: Implementación de método optimizado - Catálogo inicial completo
-    // Obtiene categorías, productos y productos de temporada en una sola consulta optimizada
-    // Usado por el frontend para cargar todo el catálogo en una sola petición HTTP
+    // Catálogo inicial completo
     public async Task<CatalogoInicialDto> ObtenerCatalogoInicial()
     {
         const string cacheKey = "CatalogoInicial";
@@ -347,7 +343,7 @@ public class ProductoService : IProductoService
         };
 
         var cacheOptions = new MemoryCacheEntryOptions()
-            .SetSlidingExpiration(TimeSpan.FromMinutes(5));
+            .SetSlidingExpiration(TimeSpan.FromMinutes(1));
 
         _cache.Set(cacheKey, catalogoCompleto, cacheOptions);
 

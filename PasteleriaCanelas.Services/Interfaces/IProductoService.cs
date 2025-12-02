@@ -22,6 +22,6 @@ public interface IProductoService
 
     // Usuario normal
 
-    //Catálogo inicial optimizado (categorías + productos + temporada en una sola petición)
+    //catálogo inicial
     Task<CatalogoInicialDto> ObtenerCatalogoInicial();
 }

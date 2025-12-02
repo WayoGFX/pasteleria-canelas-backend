@@ -10,13 +10,16 @@ using Microsoft.AspNetCore.ResponseCompression;
 var builder = WebApplication.CreateBuilder(args);
 
 // ============================================================================
-// CONFIGURAR PUERTO DINÁMICO (DEBE IR ANTES DE builder.Build())
+// CONFIGURAR PUERTO DINÁMICO (SOLO PARA PRODUCCIÓN/RAILWAY)
 // ============================================================================
-var port = Environment.GetEnvironmentVariable("PORT") ?? "5000";
-builder.WebHost.ConfigureKestrel(options =>
+if (!builder.Environment.IsDevelopment())
 {
-    options.ListenAnyIP(int.Parse(port));
-});
+    var port = Environment.GetEnvironmentVariable("PORT") ?? "5000";
+    builder.WebHost.ConfigureKestrel(options =>
+    {
+        options.ListenAnyIP(int.Parse(port));
+    });
+}
 
 var myAllowSpecificOrigins = "_myAllowSpecificOrigins";
 
@@ -124,16 +127,14 @@ app.MapControllers();
 app.Run();
 
 
-// ============================================================================
-// MÉTODO HELPER: Convertir DATABASE_URL de Railway al formato de .NET
-// ============================================================================
+
+// MÉTODO HELPER Convertir DATABASE_URL de Railway al formato de .NET
+
 static string ConvertPostgresUrl(string url)
 {
     try
     {
-        // Railway da: postgres://user:pass@host:port/dbname
-        // .NET necesita: Host=host;Port=port;Database=dbname;Username=user;Password=pass
-        
+       
         var uri = new Uri(url.Replace("postgres://", "postgresql://"));
         var db = uri.AbsolutePath.Trim('/');
         var userInfo = uri.UserInfo.Split(':');
@@ -147,6 +148,6 @@ static string ConvertPostgresUrl(string url)
     catch (Exception ex)
     {
         Console.WriteLine($"Error convirtiendo DATABASE_URL: {ex.Message}");
-        return url; // Si falla, devuelve el original
+        return url; // si falla devuelve el original url
     }
 }

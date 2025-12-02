@@ -20,7 +20,7 @@ public class CategoriasController : ControllerBase
         _categoriaService = categoriaService;
     }
 
-    // Endpoint 1: Mostrar todas las categorias | solo si está activa
+    // Endpoint 1 Mostrar todas las categorias | solo si está activa
     // GET /api/Categorias
     [HttpGet]
     public async Task<ActionResult<IEnumerable<CategoriaDto>>> GetCategorias()
@@ -29,7 +29,7 @@ public class CategoriasController : ControllerBase
         return Ok(categorias);
     }
 
-    // Endpoint 2: Mostrar categoria por id | solo si está activa
+    // Endpoint 2 Mostrar categoria por id | solo si está activa
     // GET /api/Categorias/{id}
     [HttpGet("{id}")]
     public async Task<ActionResult<CategoriaDto>> GetCategoriaId(int id)
@@ -42,7 +42,7 @@ public class CategoriasController : ControllerBase
         return Ok(categoria);
     }
 
-    // Endpoint 3: Agregar nueva categoria
+    // Endpoint 3 Agregar nueva categoria
     // POST /api/Categorias
     [HttpPost]
     public async Task<ActionResult<CategoriaDto>> PostCategoria(CategoriaCreacionDto categoriaDto)
@@ -57,7 +57,7 @@ public class CategoriasController : ControllerBase
         return CreatedAtAction(nameof(GetCategoriaId), new { id = nuevaCategoria.CategoriaId }, nuevaCategoria);
     }
 
-    // Endpoint 3: actualizar la categoria
+    // Endpoint 3 actualizar la categoria
     // PUT /api/Categorias/{id}
     [HttpPut("{id}")]
 public async Task<IActionResult> ActualizarCategoria(int id, [FromBody] CategoriaActualizacionDto categoriaDto)
@@ -78,7 +78,7 @@ public async Task<IActionResult> ActualizarCategoria(int id, [FromBody] Categori
     return NoContent();
 }
 
-    // Endpoint 4: Eliminar categoria | solo si no tiene productos
+    // Endpoint 4 Eliminar categoria | solo si no tiene productos
     // DELETE /api/Categorias/{id}
     [HttpDelete("{id}")]
     public async Task<IActionResult> DeleteCategoria(int id)
