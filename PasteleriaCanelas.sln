@@ -11,6 +11,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PasteleriaCanelas.Data", "P
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PasteleriaCanelas.Services", "PasteleriaCanelas.Services\PasteleriaCanelas.Services.csproj", "{79AB4D79-DF5A-4EBA-8E0F-25CDC474BFB2}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PasteleriaCanelas.Tests", "PasteleriaCanelas.Tests\PasteleriaCanelas.Tests.csproj", "{F88F1DB7-2F8C-4927-B30F-09639F5E7DED}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -69,6 +71,18 @@ Global
 		{79AB4D79-DF5A-4EBA-8E0F-25CDC474BFB2}.Release|x64.Build.0 = Release|Any CPU
 		{79AB4D79-DF5A-4EBA-8E0F-25CDC474BFB2}.Release|x86.ActiveCfg = Release|Any CPU
 		{79AB4D79-DF5A-4EBA-8E0F-25CDC474BFB2}.Release|x86.Build.0 = Release|Any CPU
+		{F88F1DB7-2F8C-4927-B30F-09639F5E7DED}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F88F1DB7-2F8C-4927-B30F-09639F5E7DED}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F88F1DB7-2F8C-4927-B30F-09639F5E7DED}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{F88F1DB7-2F8C-4927-B30F-09639F5E7DED}.Debug|x64.Build.0 = Debug|Any CPU
+		{F88F1DB7-2F8C-4927-B30F-09639F5E7DED}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{F88F1DB7-2F8C-4927-B30F-09639F5E7DED}.Debug|x86.Build.0 = Debug|Any CPU
+		{F88F1DB7-2F8C-4927-B30F-09639F5E7DED}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F88F1DB7-2F8C-4927-B30F-09639F5E7DED}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F88F1DB7-2F8C-4927-B30F-09639F5E7DED}.Release|x64.ActiveCfg = Release|Any CPU
+		{F88F1DB7-2F8C-4927-B30F-09639F5E7DED}.Release|x64.Build.0 = Release|Any CPU
+		{F88F1DB7-2F8C-4927-B30F-09639F5E7DED}.Release|x86.ActiveCfg = Release|Any CPU
+		{F88F1DB7-2F8C-4927-B30F-09639F5E7DED}.Release|x86.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
