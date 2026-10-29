@@ -1,16 +1,16 @@
 # Pastelería Canelas - Backend API
 
-> 🌐 **Aplicación en Vivo (Frontend):** [https://pasteleria-canelas-frontend.vercel.app/](https://pasteleria-canelas-frontend.vercel.app/)
+> [https://pasteleria-canelas-frontend.vercel.app/](https://pasteleria-canelas-frontend.vercel.app/)
 
 Backend RESTful desarrollado en **.NET 8** con arquitectura en capas para la gestión del catálogo, categorías, productos y precios de la pastelería **Canelas**. Diseñado para ofrecer alto rendimiento, desacoplamiento y compatibilidad directa con despliegues en la nube (Docker / Railway / PostgreSQL).
 
 ---
 
-## 🌐 Demo y Aplicación en Producción
+## Demo y Aplicación en Producción
 
 Puedes ver la aplicación completa en funcionamiento conectada a este backend a través de la interfaz web desplegada en Vercel:
 
-🔗 **Demo en Vivo:** [pasteleria-canelas-frontend.vercel.app](https://pasteleria-canelas-frontend.vercel.app/)
+[pasteleria-canelas-frontend.vercel.app](https://pasteleria-canelas-frontend.vercel.app/)
 
 ---
 
